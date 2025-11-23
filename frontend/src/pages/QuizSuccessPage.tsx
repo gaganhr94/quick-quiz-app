@@ -5,7 +5,6 @@ import { CheckCircle, Home, PlayArrow } from '@mui/icons-material';
 export default function QuizSuccessPage() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
-    const quizId = searchParams.get('quizId');
     const quizTitle = searchParams.get('title');
 
     return (
