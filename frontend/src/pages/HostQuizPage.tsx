@@ -46,10 +46,10 @@ export default function HostQuizPage() {
                 Quiz is Live!
               </Typography>
               <Typography sx={{ mb: 2 }}>
-                Join Link: <Link to={`/ join - quiz / ${hostedQuizId} `}>{getJoinUrl()}</Link>
+                Join Link: <Link to={`/join-quiz/${hostedQuizId}`}>{getJoinUrl()}</Link>
               </Typography>
               <QRCode value={getJoinUrl()} />
-              <Button component={Link} to={`/ quiz - admin / ${hostedQuizId} `} variant="contained" size="large" sx={{ mt: 4 }}>
+              <Button component={Link} to={`/quiz-admin/${hostedQuizId}`} variant="contained" size="large" sx={{ mt: 4 }}>
                 Start and Manage Quiz
               </Button>
             </Box>
