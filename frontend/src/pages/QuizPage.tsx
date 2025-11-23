@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
-import { Container, Box, Typography, Button, List, ListItem, ListItemText, Card, CardContent, Grid, Paper, Chip, Avatar, LinearProgress } from '@mui/material';
+import { Container, Box, Typography, Button, List, ListItem, ListItemText, Grid, Paper, Chip, Avatar, LinearProgress } from '@mui/material';
 import { useWebSocket } from '../hooks/useWebSocket';
 import { EmojiEvents as TrophyIcon, Person as PersonIcon, Timer as TimerIcon } from '@mui/icons-material';
 import { useColorMode } from '../context/ThemeContext';
