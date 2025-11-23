@@ -20,8 +20,7 @@ vendor/
 # Build output
 /bin
 /dist
-server
-main
+/main
 
 # Database files
 *.db
