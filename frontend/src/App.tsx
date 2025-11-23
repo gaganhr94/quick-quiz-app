@@ -11,10 +11,14 @@ import JoinQuizPage from './pages/JoinQuizPage';
 import QuizPage from './pages/QuizPage';
 import Header from './components/Header';
 import { NotificationProvider } from './context/NotificationContext';
-import theme from './theme';
+import { ColorModeProvider, useColorMode } from './context/ThemeContext';
+import { getTheme } from './theme';
 import './App.css';
 
-function App() {
+function AppContent() {
+  const { mode } = useColorMode();
+  const theme = getTheme(mode);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -40,6 +44,14 @@ function App() {
         </Router>
       </NotificationProvider>
     </ThemeProvider>
+  );
+}
+
+function App() {
+  return (
+    <ColorModeProvider>
+      <AppContent />
+    </ColorModeProvider>
   );
 }
 

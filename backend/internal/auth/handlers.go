@@ -17,7 +17,8 @@ import (
 var jwtKey = []byte("my_secret_key")
 
 type Claims struct {
-	UserID string `json:"user_id"`
+	UserID   string `json:"user_id"`
+	Username string `json:"username"`
 	jwt.RegisteredClaims
 }
 
@@ -74,7 +75,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	expirationTime := time.Now().Add(24 * time.Hour)
 	claims := &Claims{
-		UserID: storedUser.ID,
+		UserID:   storedUser.ID,
+		Username: storedUser.Username,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(expirationTime),
 		},

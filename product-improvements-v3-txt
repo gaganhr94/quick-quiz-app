@@ -1,0 +1,5 @@
+1. On the top right, once the login is successful, you need not display the session token. Display the username
+2. On signout/logout, once it's successful, bring back the user to the login/register page
+3. I see that the header bar in the website keeps changing sizes as per the content of the page. This should be fixed. The page header should always strech to the length of the screen
+4. Also in the same header, on clicking the profile logo, the user should now also get an option to switch to light/dark mode of the website
+5. Currently there is a dark mode, introduce a light mode to the website as well and allow the user to choose whatever they want to see

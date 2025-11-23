@@ -1,26 +1,51 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, PaletteMode } from '@mui/material';
 
-const theme = createTheme({
+export const getTheme = (mode: PaletteMode) => createTheme({
   palette: {
-    mode: 'dark',
-    primary: {
-      main: '#7C3AED', // Violet
-      light: '#A78BFA',
-      dark: '#5B21B6',
-    },
-    secondary: {
-      main: '#10B981', // Emerald
-      light: '#34D399',
-      dark: '#059669',
-    },
-    background: {
-      default: '#0F172A', // Slate 900
-      paper: '#1E293B', // Slate 800
-    },
-    text: {
-      primary: '#F8FAFC', // Slate 50
-      secondary: '#94A3B8', // Slate 400
-    },
+    mode,
+    ...(mode === 'light'
+      ? {
+        // Light Mode
+        primary: {
+          main: '#7C3AED', // Violet
+          light: '#A78BFA',
+          dark: '#5B21B6',
+        },
+        secondary: {
+          main: '#10B981', // Emerald
+          light: '#34D399',
+          dark: '#059669',
+        },
+        background: {
+          default: '#F1F5F9', // Slate 100
+          paper: '#FFFFFF', // White
+        },
+        text: {
+          primary: '#1E293B', // Slate 800
+          secondary: '#64748B', // Slate 500
+        },
+      }
+      : {
+        // Dark Mode
+        primary: {
+          main: '#7C3AED', // Violet
+          light: '#A78BFA',
+          dark: '#5B21B6',
+        },
+        secondary: {
+          main: '#10B981', // Emerald
+          light: '#34D399',
+          dark: '#059669',
+        },
+        background: {
+          default: '#0F172A', // Slate 900
+          paper: '#1E293B', // Slate 800
+        },
+        text: {
+          primary: '#F8FAFC', // Slate 50
+          secondary: '#94A3B8', // Slate 400
+        },
+      }),
   },
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
@@ -58,9 +83,9 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 16,
-          background: 'rgba(30, 41, 59, 0.7)',
+          background: mode === 'dark' ? 'rgba(30, 41, 59, 0.7)' : 'rgba(255, 255, 255, 0.8)',
           backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.05)',
         },
       },
     },
@@ -70,10 +95,10 @@ const theme = createTheme({
           '& .MuiOutlinedInput-root': {
             borderRadius: 8,
             '& fieldset': {
-              borderColor: 'rgba(255, 255, 255, 0.2)',
+              borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
             },
             '&:hover fieldset': {
-              borderColor: 'rgba(255, 255, 255, 0.4)',
+              borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 0, 0, 0.4)',
             },
           },
         },
@@ -81,5 +106,3 @@ const theme = createTheme({
     },
   },
 });
-
-export default theme;

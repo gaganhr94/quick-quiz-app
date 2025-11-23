@@ -30,7 +30,7 @@ export default function HostQuizPage() {
 
   const getJoinUrl = () => {
     if (!hostedQuizId) return '';
-    return window.location.origin + `/ join - quiz / ${hostedQuizId} `;
+    return window.location.origin + `/join-quiz/${hostedQuizId}`;
   }
 
   return (
