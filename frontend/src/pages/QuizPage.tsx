@@ -41,14 +41,14 @@ export default function QuizPage() {
                 // Navigate to quiz end page with leaderboard data
                 const sortedLeaderboard = msg.payload.sort((a: any, b: any) => b.score - a.score);
                 const leaderboardParam = encodeURIComponent(JSON.stringify(sortedLeaderboard));
-                navigate(`/ quiz - end ? leaderboard = ${leaderboardParam} `);
+                navigate(`/quiz-end?leaderboard=${leaderboardParam}`);
                 break;
             default:
                 break;
         }
     }
 
-    const { sendMessage } = useWebSocket(quizId, name, handleMessage);
+    const { sendMessage } = useWebSocket(quizId || '', name || undefined, handleMessage);
 
     useEffect(() => {
         if (name) {

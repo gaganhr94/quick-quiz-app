@@ -1,29 +1,53 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Container, Box, Typography, TextField, Button } from '@mui/material';
+import { useNotification } from '../context/NotificationContext';
+import { API_ENDPOINTS } from '../config/api';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { showNotification } = useNotification();
 
   const handleLogin = async () => {
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    if (!username.trim() || !password.trim()) {
+      showNotification('Please enter both username and password', 'error');
+      return;
+    }
 
-    if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('userId', data.userId);
-      console.log('Login successful');
-      navigate('/');
-    } else {
-      console.error('Login failed');
+    try {
+      const response = await fetch(API_ENDPOINTS.login, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userId', data.userId);
+        showNotification('Login successful!', 'success');
+        navigate('/');
+      } else {
+        const errorText = await response.text();
+        let errorMessage = 'Login failed';
+
+        if (response.status === 401) {
+          errorMessage = 'Invalid username or password';
+        } else if (response.status === 404) {
+          errorMessage = 'User not found. Please register first.';
+        } else if (errorText) {
+          errorMessage = errorText;
+        }
+
+        showNotification(errorMessage, 'error');
+      }
+    } catch (error) {
+      showNotification('Network error. Please check your connection.', 'error');
+      console.error('Login error:', error);
     }
   };
 

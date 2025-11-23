@@ -1,0 +1,2 @@
+1. If the login fails due to user not valid, user not present, then an appropriate message should be displayed to the user
+2. Currently I see in the code that the backend base url is hardcoded all over the code saying localhost:8080, this shouldn't be the case. It should be configurable via a env variable while hosting the frontend. So kindly reform this

@@ -3,6 +3,7 @@ import { Container, Box, Typography, TextField, Button, FormControl, Radio, Radi
 import { Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { useNotification } from '../context/NotificationContext';
 import { useNavigate } from 'react-router-dom';
+import { API_ENDPOINTS } from '../config/api';
 
 // Define types for Quiz, Question, and Option for type safety
 interface Option {
@@ -109,7 +110,7 @@ export default function CreateQuizPage() {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/quizzes', {
+      const response = await fetch(API_ENDPOINTS.quizzes, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

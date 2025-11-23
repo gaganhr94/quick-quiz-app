@@ -1,37 +1,38 @@
 import { useEffect, useState, useRef } from 'react';
+import { API_ENDPOINTS } from '../config/api';
 
-export const useWebSocket = (quizId: string | undefined, name: string | null, onMessage: (msg: any) => void) => {
+export const useWebSocket = (quizId: string, name?: string, onMessage?: (data: any) => void) => {
     const [ws, setWs] = useState<WebSocket | null>(null);
     const onMessageRef = useRef(onMessage);
 
+    // Update ref when onMessage changes
     useEffect(() => {
         onMessageRef.current = onMessage;
     }, [onMessage]);
 
     useEffect(() => {
-        if (!quizId) return;
-        const wsUrl = `ws://${window.location.host}/ws/quiz/${quizId}/join?name=${name || ''}`;
-        const socket = new WebSocket(wsUrl);
+        const wsUrl = API_ENDPOINTS.wsQuiz(quizId, name);
+        const websocket = new WebSocket(wsUrl);
 
-        socket.onopen = () => {
+        websocket.onopen = () => {
             console.log('WebSocket connected');
-            setWs(socket);
+            setWs(websocket);
         };
 
-        socket.onmessage = (event) => {
+        websocket.onmessage = (event) => {
             const message = JSON.parse(event.data);
             if (onMessageRef.current) {
                 onMessageRef.current(message);
             }
         };
 
-        socket.onclose = () => {
+        websocket.onclose = () => {
             console.log('WebSocket disconnected');
             setWs(null);
         };
 
         return () => {
-            socket.close();
+            websocket.close();
         };
     }, [quizId, name]);
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { QRCode } from 'react-qrcode-logo';
 import { Container, Box, Typography, List, ListItem, ListItemText, Button, Paper } from '@mui/material';
+import { API_ENDPOINTS } from '../config/api';
 
 interface Quiz {
   id: string;
@@ -14,9 +15,9 @@ export default function HostQuizPage() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    fetch('/api/quizzes', {
+    fetch(API_ENDPOINTS.quizzes, {
       headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token} `
       }
     })
       .then((res) => res.json())
@@ -29,7 +30,7 @@ export default function HostQuizPage() {
 
   const getJoinUrl = () => {
     if (!hostedQuizId) return '';
-    return window.location.origin + `/join-quiz/${hostedQuizId}`;
+    return window.location.origin + `/ join - quiz / ${hostedQuizId} `;
   }
 
   return (
@@ -45,10 +46,10 @@ export default function HostQuizPage() {
                 Quiz is Live!
               </Typography>
               <Typography sx={{ mb: 2 }}>
-                Join Link: <Link to={`/join-quiz/${hostedQuizId}`}>{getJoinUrl()}</Link>
+                Join Link: <Link to={`/ join - quiz / ${hostedQuizId} `}>{getJoinUrl()}</Link>
               </Typography>
               <QRCode value={getJoinUrl()} />
-              <Button component={Link} to={`/quiz-admin/${hostedQuizId}`} variant="contained" size="large" sx={{ mt: 4 }}>
+              <Button component={Link} to={`/ quiz - admin / ${hostedQuizId} `} variant="contained" size="large" sx={{ mt: 4 }}>
                 Start and Manage Quiz
               </Button>
             </Box>

@@ -1,27 +1,53 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Container, Box, Typography, TextField, Button } from '@mui/material';
-
+import { useNotification } from '../context/NotificationContext';
+import { API_ENDPOINTS } from '../config/api';
 
 export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { showNotification } = useNotification();
 
   const handleRegister = async () => {
-    const response = await fetch('/api/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    });
+    if (!username.trim() || !password.trim()) {
+      showNotification('Please enter both username and password', 'error');
+      return;
+    }
 
-    if (response.ok) {
-      console.log('Registration successful');
-      navigate('/login');
-    } else {
-      console.error('Registration failed');
+    if (password.length < 6) {
+      showNotification('Password must be at least 6 characters', 'error');
+      return;
+    }
+
+    try {
+      const response = await fetch(API_ENDPOINTS.register, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (response.ok) {
+        showNotification('Registration successful! Please login.', 'success');
+        navigate('/login');
+      } else {
+        const errorText = await response.text();
+        let errorMessage = 'Registration failed';
+
+        if (response.status === 409) {
+          errorMessage = 'Username already exists. Please choose another.';
+        } else if (errorText) {
+          errorMessage = errorText;
+        }
+
+        showNotification(errorMessage, 'error');
+      }
+    } catch (error) {
+      showNotification('Network error. Please check your connection.', 'error');
+      console.error('Registration error:', error);
     }
   };
 
