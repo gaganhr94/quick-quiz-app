@@ -1,0 +1,21 @@
+1. Build an application which can host quizzes
+2. Users should be able to register/login to the platform - this looks like the old implementation has not implemented this. Need to work on this
+3. Once logged in, users should be able to create quizzes
+4. To create a quiz, the user must give all the questions along with the 2,3,4 or more options
+5. User given the ability to choose the number of options. Default value is 4. The number of options must be configurable for each question
+6. Once the user finishes submitting all his questions, he can save the quiz he created
+7. There must be an option to host the quiz, which now creates a QR code scanning which participants can join the quizzes
+8. Quiz once hosted, now the creator of the quiz has full control over when the first question of the quiz appears to the participants
+9. Participants who are joining the quiz, must enter a unique name. Remember, no two participants in the same quiz can have the same name, our platform should take care of it
+10. Once the question appears to the participant, the time starts ticking. As the time taken to answer the question increases, the score point gained for the right answer to the question reduces
+11. Once the quiz admin clicks continue/display score, the participants should see a leaderboard + the score they earned in the last round of answering question
+12. Based on quiz admin control, now he can proceed to the next question
+13. And this pattern of leaderboard display to the participants must continue until the end of the quiz
+14. In the end, the final leaderboard, with an highlight to the 1st, 2nd, 3rd position winners and the rest of the participants can be displayed
+15. When you are displaying the leaderboard to the participant, make sure to highlight him on the leaderboard so that he can easily spot his standings on the leaderboard
+16. Remember to design the system in such a way that it can support a huge number of participants, and parallel quiz conduction by different quiz admins with complete isolation
+17. Make sure to keep the UI/UX as responsive as possible, and it should also be modern UI. It should also be mobile responsive
+18. Tech Stack to be used here - Go backend, Typescript Frontend
+19. You have the freedom to use any DB, SQL or NoSQL is something you can decide based on best practices and requirements
+20. For now, register/login for quiz creators is just username and password. We can think of making it better sometime in the future
+21. Let the UI be eyecatching as possible. Currently the UI present doesn't have anything eye catching. It looks like a very plain website

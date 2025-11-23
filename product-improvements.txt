@@ -1,0 +1,11 @@
+1. Both the quiz host and the participant should be able to see the time ticking, currently we are not able to see the time which is causing an user experience issue
+2. I need to host this project on vercel, so give me the pipelines to build and deploy the project on vercel
+3. Give me a readme of what I should set in the pipelines or github envs to make the pipeline work
+4. Also once I login, I should be able to see a profile at the top right so that I can click on it and opt to sign-out
+5. Once we signout, it should return to the login/register screen
+6. Once the quiz is created, it should display a message saying quiz is successfully created on a new page, and it should give the option to the user to return to the home page or navigate to the host the quiz page, currently it just comes back to the create quiz page
+7. Avoid the popup to give information, instead give the information in the UI itself for errors and success mesaages
+8. When the quiz ends for the host, it no longer makes sense to show the option of next question, instead it can redirect to a new page with only the leaderboard, which is much more fancier with big top 3 winners followed by the rest of the ranks
+9. Once the start quiz button is pressed in the beginnning by the host, it doesn't make sense to show that button after the first click
+10. It doesn't make sense to show the next question button right before the host even starts the quiz
+11. I have listed out a couple of UI UX issues here, which will have to be fixed. 
