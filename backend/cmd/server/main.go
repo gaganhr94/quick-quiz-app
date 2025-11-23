@@ -33,7 +33,13 @@ func main() {
 	wsRouter.HandleFunc("/quiz/{id}/join", realtime.ServeWs)
 
 	// Apply CORS middleware
-	handler := cors.Default().Handler(r)
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"}, // Allow all origins for now to fix Vercel issues
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Authorization", "Content-Type"},
+		AllowCredentials: true,
+	})
+	handler := c.Handler(r)
 
 	fmt.Println("Server is running on port 8080")
 	http.ListenAndServe(":8080", handler)
